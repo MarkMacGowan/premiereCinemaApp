@@ -7,7 +7,9 @@
             $username=$_POST['username'];
             $email=$_POST['email'];
             $password=$_POST['password'];
-            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+            
+            // password not encrypted demonstrates OWASP Crytographic failure
+            //$hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
             // insert into table
             $stmt = $db->prepare("INSERT INTO users (username, email, password) VALUES (:username, :email, :password)");

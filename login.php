@@ -6,20 +6,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $username = $_POST['username'] ?? '';
         $password = $_POST['password'] ?? '';
-        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+        // password not encrypted demonstrates OWASP Crytographic failure
+        //$hashedPassword = password_hash($password, PASSWORD_DEFAULT);
         // Fetch the user by username
         $stmt = $db->prepare("SELECT * FROM users WHERE username = :username");
         $stmt->bindValue(':username', $username, SQLITE3_TEXT);
         $result = $stmt->execute();
         $user = $result->fetchArray(SQLITE3_ASSOC);
-
-        //echo "Entered username: $username<br>";
-        //echo "Entered password: $hashedPassword<br>";
-        //echo "Stored hash: " . $user['password'] . "<br>";
-        //echo '<pre>';
-       // print_r($user);
-       // echo '</pre>';
-
 
         // If user found and password is correct
         if ($user && password_verify($password, $user['password'])) {

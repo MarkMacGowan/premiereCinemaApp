@@ -19,8 +19,8 @@
         <h1>Welcome, <?php echo htmlspecialchars($username); ?>!</h1>
         <div class="container mt-5">
             <h1 class='mb-4'>Now Showing</h1>
- <p>
-                        <a href='logout.php' class='btn btn-primary me-2'>LogOut</a>
+                    <p>
+                        <!-- No Logout button demonstrates OWASP Broken Authentication-->
                     </p>
             <div class="row">
             <?php
