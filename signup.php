@@ -33,6 +33,7 @@
                         <input type="password" name="password" id="password" class="form-control">
                     </div>
                 <button type="submit" class="btn btn-primary">Sign Up</button>
+                <a href="index.html" class="btn btn-primary me-2">Return</a>
             </form>
     </body>
 </html>

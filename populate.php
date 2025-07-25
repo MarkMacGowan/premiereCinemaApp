@@ -4,11 +4,10 @@
 
     // insert movies 
     $db->exec("
-        INSERT INTO movies (movietitle, genre, rating) VALUES
-            ('Star Trek', 'Sci-Fi', 'PG-13'),
-            ('Star Wars Episode V The Empire Strikes Back', 'Science Fantasy', 'PG'),
-            ('Zoolander', 'Comedy', 'PG-13'),
-            ('Ferris Bueller''s Day Off', 'Comedy/Drama', 'PG-13')
+        INSERT INTO movies (movietitle, genre, rating,image_path) VALUES
+            ('Star Trek', 'Sci-Fi', 'PG-13','images\startrekPoster.jpg'),
+            ('Star Wars Episode V The Empire Strikes Back', 'Science Fantasy', 'PG','images\starWars5Poster.jpg'),
+            ('Zoolander', 'Comedy', 'PG-13','images\zoolanderPoster.jpg')
     ");
 
     $db->exec("
@@ -18,9 +17,7 @@
             ('2', '2025-08-01 13:00'),
             ('2', '2025-08-01 16:00'),
             ('3', '2025-08-02 08:00'),
-            ('3', '2025-08-02 11:00'),
-            ('4', '2025-08-03 08:00'),
-            ('4', '2025-08-03 11:00')
+            ('3', '2025-08-02 11:00')
     ");
 
     echo "✅ movie table and timetable table populated";

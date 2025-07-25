@@ -19,7 +19,8 @@ if (!file_exists('data.sqlite3')) {
         id              INTEGER  PRIMARY KEY AUTOINCREMENT,
         movietitle      TEXT NOT NULL, 
         genre           TEXT, 
-        rating          TEXT
+        rating          TEXT,
+        image_path      TEXT
      )
     ");
 
