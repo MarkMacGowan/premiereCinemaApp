@@ -2,23 +2,9 @@
 
          
         
-        $db = new SQLite3('data.sqlite3');
+        
 
         
-        $db->exec("CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, username TEXT, password TEXT)");
-
-        
-        $db->exec("INSERT INTO users (username, password) VALUES ('admin', '1234')");
-
-        
-        $result = $db->query("SELECT * FROM users");
-
-       /*  while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
-            echo "User: " . $row['username'] . "<br>";
-        } */
-
-
-
 
     ?>
 <!DOCTYPE html>
@@ -46,7 +32,7 @@
                         <label for="password" class="form-label">Password</label>
                         <input type="password" name="password" id="password" class="form-control">
                     </div>
-                <button type="submit" class="btn btn-primary">Login</button>
+                <button type="submit" class="btn btn-primary">Sign Up</button>
             </form>
     </body>
 </html>
