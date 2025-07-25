@@ -1,9 +1,3 @@
-
-
-
-
-
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -27,3 +21,12 @@
             
     </body>
 </html>
+<?php
+    $db = new SQLite3('data.sqlite3');
+    $db->exec("PRAGMA foreign_key=ON;");
+           
+
+
+
+
+?>

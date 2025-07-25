@@ -1,12 +1,28 @@
 <?php
+    if ($_SERVER["REQUEST_METHOD"] === "POST"){
+            $db = new SQLite3('data.sqlite3');
+            $db->exec("PRAGMA foreign_key=ON");
 
-         
-        
-        
+            // get input and assign them to variables
+            $username=$_POST['username'];
+            $email=$_POST['email'];
+            $password=$_POST['password'];
 
-        
 
-    ?>
+            // insert into table
+            $stmt = $db->prepare("INSERT INTO users (username, email, password) VALUES (:username, :email, :password)");
+            $stmt ->bindValue(':username',$username,SQLITE3_TEXT);
+            $stmt ->bindValue(':email',$email,SQLITE3_TEXT);
+            $stmt ->bindValue(':password',$password,SQLITE3_TEXT);
+            $stmt ->execute();
+
+            echo "<p>Signup Sucessful!</p>";
+    }
+
+
+
+
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -15,18 +31,14 @@
     </head>     
     <body class="container mt-5">
             <h1>Sign Up</h1>
-            <form method="$post" action="$signup.php">
+            <form method="post" action="signup.php">
                     <div class="mb-3">
-                        <label for="firstName" class="form-label">First Name</label>
-                        <input type="text" name="firstName" id="firstName" class="form-control">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" name="username" id="username" class="form-control">
                     </div>
                     <div class="mb-3">
-                        <label for="lastName" class="form-label">Last Name</label>
-                        <input type="text" name="lastName" id="lastName" class="form-control">
-                    </div>
-                    <div class="mb-3">
-                        <label for="userName" class="form-label">Username</label>
-                        <input type="text" name="userName" id="userName" class="form-control">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="text" name="email" id="email" class="form-control">
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label">Password</label>
