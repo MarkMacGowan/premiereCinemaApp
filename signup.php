@@ -7,16 +7,31 @@
             $username=$_POST['username'];
             $email=$_POST['email'];
             $password=$_POST['password'];
-
+            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
             // insert into table
             $stmt = $db->prepare("INSERT INTO users (username, email, password) VALUES (:username, :email, :password)");
             $stmt ->bindValue(':username',$username,SQLITE3_TEXT);
             $stmt ->bindValue(':email',$email,SQLITE3_TEXT);
-            $stmt ->bindValue(':password',$password,SQLITE3_TEXT);
+            $stmt ->bindValue(':password',$hashedPassword,SQLITE3_TEXT);
             $stmt ->execute();
 
             echo "<p>Signup Sucessful!</p>";
+
+            //header("Location: movieListings.php");
+            $newUserId=$db->lastInsertRowID();
+
+            session_start();
+            $_SESSION['user_id'] = $newUserId;
+            $_SESSION['username'] = $username;
+            $_SESSION['email'] = $email;
+
+            header("Location: movielistings.php");
+
+        
+            
+
+            exit();
     }
 
 

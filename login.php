@@ -1,3 +1,49 @@
+<?php
+session_start();
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $db = new SQLite3('data.sqlite3');
+        $db->exec("PRAGMA foreign_key=ON;");
+
+        $username = $_POST['username'] ?? '';
+        $password = $_POST['password'] ?? '';
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+        // Fetch the user by username
+        $stmt = $db->prepare("SELECT * FROM users WHERE username = :username");
+        $stmt->bindValue(':username', $username, SQLITE3_TEXT);
+        $result = $stmt->execute();
+        $user = $result->fetchArray(SQLITE3_ASSOC);
+
+        //echo "Entered username: $username<br>";
+        //echo "Entered password: $hashedPassword<br>";
+        //echo "Stored hash: " . $user['password'] . "<br>";
+        //echo '<pre>';
+       // print_r($user);
+       // echo '</pre>';
+
+
+        // If user found and password is correct
+        if ($user && password_verify($password, $user['password'])) {
+        
+            // Set session
+            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['username'] = $user['username'];
+            $_SESSION['email'] = $user['email'];
+            
+            
+
+            // Redirect to protected page
+            header("Location: movieListings.php");
+            exit();
+        } else {
+            
+            $error = "Invalid username or password.";
+        }
+
+     
+
+}    
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -6,7 +52,7 @@
     </head>     
     <body class="container mt-5">
             <h1> Login</h1>
-            <form method="$post" action="$login.php">
+            <form method="post" action="login.php">
                     <div class="mb-3">
                         <label for="username" class="form-label">Username</label>
                         <input type="text" name="username" id="username" class="form-control">
@@ -21,12 +67,3 @@
             
     </body>
 </html>
-<?php
-    $db = new SQLite3('data.sqlite3');
-    $db->exec("PRAGMA foreign_key=ON;");
-           
-
-
-
-
-?>
